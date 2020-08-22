@@ -10,19 +10,25 @@
           <div class="falcon-details">
             <div class="background">
               <h3>Destination 1</h3>
-              <select class="form-control" formControlName="destination_1" >
+              <select class="form-control" formControlName="destination_1">
                 <option selected value={{destinationValue}}>Select planet</option>
-                <option *ngFor="let planet of planentsData" value={{planet}}>{{planet.name}}</option>
+                <option *ngFor="let planet of planentsData" [ngValue]='planet'
+                  [disabled]="planet.name==findFalconForm.value.destination_3.name "
+                  [disabled]="planet.name==findFalconForm.value.destination_2.name "
+                  [disabled]=" planet.name==findFalconForm.value.destination_4.name">{{planet.name}}</option>
               </select>
             </div>
 
             <div class="vehicle-details" *ngIf="findFalconForm.value.destination_1.name !== 'select'">
-              <p>{{findFalconForm.value.destination_1.name}}</p>
-              <p>vechil1</p>
               <div *ngFor="let vehicle of vehicleData">
                 <div class="custom-control custom-radio">
-                  <input type="radio" [(ngModel)]="radioSelected1" class="custom-control-input"  value="{{vehicle.name}}"  id=destination1{{vehicle.name}} formControlName="vehicle_name1">
-                  <label class="custom-control-label" for=destination1{{vehicle.name}} >{{vehicle.name}}({{vehicle.total_no}})</label>
+                  <input type="radio" (click)="updateVechileCount(vehicle,$event)"
+                   [attr.disabled]="findFalconForm.value.destination_1.distance > vehicle.max_distance ? true : null"
+                   [attr.disabled]=" vehicle.total_no > 0 ? null : true"
+                    [(ngModel)]="radioSelected1" class="custom-control-input" [value]='vehicle'
+                    id=destination1{{vehicle.name}} formControlName="vehicle_name1" name="vehicle_name1">
+                  <label class="custom-control-label"
+                    for=destination1{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
                 </div>
               </div>
             </div>
@@ -31,19 +37,24 @@
           <div class="falcon-details">
             <div class="background">
               <h3>Destination 2</h3>
-              <select class="form-control" formControlName="destination_2" >
-                <option selected value="select">Select planet</option>
-                <option *ngFor="let planet of planentsData" value={{planet.name}}
-                  [disabled]="planet.name==findFalconForm.value.destination_1">{{planet.name}}</option>
+              <select class="form-control" formControlName="destination_2">
+                <option selected value={{destinationValue}}>Select planet</option>
+                <option *ngFor="let planet of planentsData" [ngValue]='planet'
+                  [disabled]="planet.name==findFalconForm.value.destination_3.name "
+                  [disabled]="planet.name==findFalconForm.value.destination_4.name "
+                  [disabled]=" planet.name==findFalconForm.value.destination_1.name">{{planet.name}}</option>
               </select>
             </div>
-            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_2 !== 'select'">
-              <p>vechil2</p>
-
+            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_2.name !== 'select'">
               <div *ngFor="let vehicle of vehicleData">
                 <div class="custom-control custom-radio">
-                  <input type="radio" [(ngModel)]="radioSelected2" class="custom-control-input" value="{{vehicle.name}}" id=destination2{{vehicle.name}} formControlName="vehicle_name2">
-                  <label class="custom-control-label" for=destination2{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
+                  <input type="radio" (click)="updateVechileCount(vehicle,$event)"
+                    [attr.disabled]="findFalconForm.value.destination_2.distance > vehicle.max_distance ? true : null"
+                    [attr.disabled]=" vehicle.total_no > 0 ? null : true"
+                    [(ngModel)]="radioSelected2" class="custom-control-input" [value]='vehicle'
+                    id=destination2{{vehicle.name}} formControlName="vehicle_name2" name="vehicle_name2">
+                  <label class="custom-control-label"
+                    for=destination2{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
                 </div>
               </div>
             </div>
@@ -51,21 +62,25 @@
           <div class="falcon-details">
             <div class="background">
               <h3>Destination 3</h3>
-              <select class="form-control" formControlName="destination_3" >
-                <option selected value="select">Select planet</option>
-                <option *ngFor="let planet of planentsData" value={{planet.name}}
-                  [disabled]="planet.name==findFalconForm.value.destination_2 "
-                  [disabled]=" planet.name==findFalconForm.value.destination_1">{{planet.name}}</option>
+              <select class="form-control" formControlName="destination_3">
+                <option selected value={{destinationValue}}>Select planet</option>
+                <option *ngFor="let planet of planentsData" [ngValue]='planet'
+                  [disabled]="planet.name==findFalconForm.value.destination_4.name "
+                  [disabled]="planet.name==findFalconForm.value.destination_2.name "
+                  [disabled]=" planet.name==findFalconForm.value.destination_1.name">{{planet.name}}</option>
 
               </select>
             </div>
-            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_3 !== 'select'">
-              <p>vechil3</p>
-
+            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_3.name !== 'select'">
               <div *ngFor="let vehicle of vehicleData">
                 <div class="custom-control custom-radio">
-                  <input type="radio" [(ngModel)]="radioSelected3" class="custom-control-input" value="{{vehicle.name}}" id=destination3{{vehicle.name}} formControlName="vehicle_name3">
-                  <label class="custom-control-label" for=destination3{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
+                  <input type="radio" (click)="updateVechileCount(vehicle,$event)"
+                  [attr.disabled]="findFalconForm.value.destination_3.distance > vehicle.max_distance ? true : null"
+                  [attr.disabled]=" vehicle.total_no > 0 ? null : true"
+                   [(ngModel)]="radioSelected3" class="custom-control-input" [value]='vehicle'
+                    id=destination3{{vehicle.name}} formControlName="vehicle_name3" name="vehicle_name3">
+                  <label class="custom-control-label"
+                    for=destination3{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
                 </div>
               </div>
             </div>
@@ -74,20 +89,23 @@
             <div class="background">
               <h3>Destination 4</h3>
               <select class="form-control" formControlName="destination_4">
-                <option selected value="select"> Select planet</option>
-                <option *ngFor="let planet of planentsData" value={{planet.name}}
-                  [disabled]="planet.name==findFalconForm.value.destination_3 "
-                  [disabled]="planet.name==findFalconForm.value.destination_2 "
-                  [disabled]=" planet.name==findFalconForm.value.destination_1">{{planet.name}}</option>
+                <option selected value={{destinationValue}}> Select planet</option>
+                <option *ngFor="let planet of planentsData" [ngValue]='planet'
+                  [disabled]="planet.name==findFalconForm.value.destination_3.name "
+                  [disabled]="planet.name==findFalconForm.value.destination_2.name "
+                  [disabled]=" planet.name==findFalconForm.value.destination_1.name">{{planet.name}}</option>
               </select>
             </div>
-            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_4 !== 'select'">
-              <p>vechil4</p>
-
+            <div class="vehicle-details" *ngIf="findFalconForm.value.destination_4.name !== 'select'">
               <div *ngFor="let vehicle of vehicleData">
                 <div class="custom-control custom-radio">
-                  <input type="radio" [(ngModel)]="radioSelected4" class="custom-control-input" value="{{vehicle.name}}" id=destination4{{vehicle.name}} formControlName="vehicle_name4">
-                  <label class="custom-control-label" for=destination4{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
+                  <input type="radio" (click)="updateVechileCount(vehicle,$event)"
+                  [attr.disabled]="findFalconForm.value.destination_4.distance > vehicle.max_distance ? true : null"
+                  [attr.disabled]=" vehicle.total_no > 0 ? null : true"
+                  [(ngModel)]="radioSelected4" class="custom-control-input" [value]='vehicle'
+                    id=destination4{{vehicle.name}} formControlName="vehicle_name4" name="vehicle_name4">
+                  <label class="custom-control-label"
+                    for=destination4{{vehicle.name}}>{{vehicle.name}}({{vehicle.total_no}})</label>
                 </div>
               </div>
             </div>

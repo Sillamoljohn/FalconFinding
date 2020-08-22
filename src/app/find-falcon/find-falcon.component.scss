@@ -1,0 +1,27 @@
+.image-center {
+  text-align: center;
+  img {
+    border-radius: 51%;
+    width: 200px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+  }
+}
+.background {
+   background-color: #ff000082;;
+  width: 250px;
+  height: 140px;
+  border-radius: 6px;
+  padding: 30px 10px;
+}
+.justifyContent{
+  justify-content: space-between;
+}
+h3{
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-success',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./success.component.scss']
 })
 export class SuccessComponent implements OnInit {
-
-  constructor() { }
+  planet;
+  timeTaken;
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+    this.planet = localStorage.getItem('planent');
+    this.timeTaken = localStorage.getItem('time');
+
   }
+
 
 }

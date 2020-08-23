@@ -1,11 +1,14 @@
-<div class="container">
+<div class="container main-content">
   <div class="row">
     <div class="col-md-12">
       <div class="text-center">
-        <h3 class="sucess">Congratulations...!</h3>
-        <img src="../../assets/Images/sucess.png">
-        <h3>Queen AI Falcone found in planet Sapir and total time taken is 265</h3>
+        <h3 class="sucess mb-5">Congratulations...!</h3>
+        <img class="mb-5" src="../../assets/Images/sucess.png">
       </div>
+      <h3>Queen AI Falcone found in planet  <span class="highlighs">{{planet}}</span> and total time taken is <span class="highlighs">{{timeTaken}}hrs</span></h3>
+
+      <button type="button" class="btn btn-info mb-5" routerLink="find-falcon">Back</button>
+
     </div>
   </div>
 </div>

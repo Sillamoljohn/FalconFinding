@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: "app-find-falcon",
   templateUrl: "./find-falcon.component.html",
@@ -27,12 +28,11 @@ export class FindFalconComponent implements OnInit {
   vechile2PrevId;
   vechile3PrevId;
   vechile4PrevId;
-
-
+  totalTime = 0;
   constructor(
     private commonService: CommonServiceService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -112,6 +112,8 @@ export class FindFalconComponent implements OnInit {
       this.commonService.findFalcon(postData).subscribe((res: any) => {
         console.log(res);
         if (res.status == "success") {
+          localStorage.setItem('planent', res.planet_name);
+          localStorage.setItem('time', this.totalTime.toString());
           this.router.navigateByUrl(`success`);
         } else {
           this.router.navigateByUrl(`fail`);
@@ -122,26 +124,41 @@ export class FindFalconComponent implements OnInit {
     }
   }
   // update vechicle count
-  updateVechileCount(vechile, event) {
+
+  updateVechileCount(vechile, event, ) {
     console.log(vechile, event.target.name);
     // vechile1
+    // check wheather the previous vechicle name is undefined or not
     if (event.target.name === 'vehicle_name1') {
       if (this.vechile1PrevId !== undefined) {
+        // check the selected vechile is not the previous one
            if (this.vechile1PrevId !== vechile.name) {
+             // get index of current selection and previous selection
              const index = this.vehicleData.findIndex(item => item.name === vechile.name);
              const index2 = this.vehicleData.findIndex(item => item.name === this.vechile1PrevId);
              console.log(index, index2);
+             // get object of previous selection using its index
              const prevData = this.vehicleData[index2];
+             // updated total number of vechile
              prevData.total_no = prevData.total_no + 1;
              this.vehicleData[index2] = prevData;
              vechile.total_no = vechile.total_no - 1;
              this.vehicleData[index] = vechile;
+             // calculating the total time taken to find the falcon
+             this.totalTime = this.totalTime - (this.findFalconForm.value.destination_1.distance / prevData.speed);
+             this.totalTime = this.totalTime + (this.findFalconForm.value.destination_1.distance / vechile.speed);
            }
       } else {
+        // find the index of selected vechile
         const index = this.vehicleData.findIndex(item => item.name === vechile.name);
         console.log(index);
+        // update the total number of vechile
         vechile.total_no = vechile.total_no - 1;
+        // object of the array is replaced with updated vechile count
         this.vehicleData[index] = vechile;
+        // updated time taken
+        this.totalTime = this.totalTime + (this.findFalconForm.value.destination_1.distance / vechile.speed);
+        console.log(this.totalTime);
       }
       this.vechile1PrevId = vechile.name;
     }
@@ -157,12 +174,18 @@ export class FindFalconComponent implements OnInit {
              this.vehicleData[index2] = prevData;
              vechile.total_no = vechile.total_no - 1;
              this.vehicleData[index] = vechile;
+             this.totalTime = this.totalTime - (this.findFalconForm.value.destination_2.distance / prevData.speed);
+             this.totalTime = this.totalTime + (this.findFalconForm.value.destination_2.distance / vechile.speed);
+
+
            }
       } else {
         const index = this.vehicleData.findIndex(item => item.name === vechile.name);
         console.log(index);
         vechile.total_no = vechile.total_no - 1;
         this.vehicleData[index] = vechile;
+        this.totalTime = this.totalTime + (this.findFalconForm.value.destination_2.distance / vechile.speed);
+        console.log(this.totalTime);
       }
       this.vechile2PrevId = vechile.name;
 
@@ -179,12 +202,16 @@ export class FindFalconComponent implements OnInit {
              this.vehicleData[index2] = prevData;
              vechile.total_no = vechile.total_no - 1;
              this.vehicleData[index] = vechile;
+             this.totalTime = this.totalTime - (this.findFalconForm.value.destination_3.distance / prevData.speed);
+             this.totalTime = this.totalTime + (this.findFalconForm.value.destination_3.distance / vechile.speed);
            }
       } else {
         const index = this.vehicleData.findIndex(item => item.name === vechile.name);
         console.log(index);
         vechile.total_no = vechile.total_no - 1;
         this.vehicleData[index] = vechile;
+        this.totalTime = this.totalTime + (this.findFalconForm.value.destination_3.distance / vechile.speed);
+        console.log(this.totalTime);
       }
       this.vechile3PrevId = vechile.name;
 
@@ -201,12 +228,16 @@ export class FindFalconComponent implements OnInit {
              this.vehicleData[index2] = prevData;
              vechile.total_no = vechile.total_no - 1;
              this.vehicleData[index] = vechile;
+             this.totalTime = this.totalTime - (this.findFalconForm.value.destination_4.distance / prevData.speed);
+             this.totalTime = this.totalTime + (this.findFalconForm.value.destination_4.distance / vechile.speed);
            }
       } else {
         const index = this.vehicleData.findIndex(item => item.name === vechile.name);
         console.log(index);
         vechile.total_no = vechile.total_no - 1;
         this.vehicleData[index] = vechile;
+        this.totalTime = this.totalTime + (this.findFalconForm.value.destination_4.distance / vechile.speed);
+        console.log(this.totalTime);
       }
       this.vechile4PrevId = vechile.name;
 

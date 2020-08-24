@@ -60,6 +60,8 @@ export class FindFalconComponent implements OnInit {
   getPlanetsDetails(): void {
     this.commonService.getPlanetLists().subscribe((res: any) => {
       this.planentsData = res;
+    }, (err) => {
+      alert("Somethimg went wrong.");
     });
   }
 
@@ -67,6 +69,8 @@ export class FindFalconComponent implements OnInit {
   getVehicleDetails(): void {
     this.commonService.getVehiclesList().subscribe((res: any) => {
       this.vehicleData = res;
+    }, (err) => {
+      alert("Somethimg went wrong.");
     });
   }
 

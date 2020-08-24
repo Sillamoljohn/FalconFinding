@@ -77,6 +77,8 @@ export class FindFalconComponent implements OnInit {
     };
     this.commonService.getToken(postData).subscribe((res: any) => {
       localStorage.setItem('token', res.token);
+    }, (err) => {
+      alert("Somethimg went wrong.");
     });
   }
 

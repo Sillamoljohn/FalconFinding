@@ -9,5 +9,34 @@ img{
   font-size: 37px;
 }
 .main-content{
-  height: 80vh;
+  height: auto !important;
+}
+
+@media(min-width:320px) and (max-width:768px){
+  img{
+    width:190px;
+  }
+  h3{
+    font-size: 25px;
+    text-align: center;
+  }
+  .highlighs {
+    color: #da40bf;
+    font-size: 25px;
+}
+.sucess{
+  color: #2066e8;
+  margin-top: 15px;
+}
+}
+@media(min-width:769px) and (max-width:992px){
+  img{
+    width:200px;
+  }
+  h3{
+    font-size: 30px;
+  }
+  .highlighs{
+font-size: 30px;
+  }
 }

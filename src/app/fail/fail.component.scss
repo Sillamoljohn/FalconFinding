@@ -2,3 +2,33 @@ img{
   width:300px;
 }
 
+@media(min-width:320px) and (max-width:576px){
+  img{
+    width: 100px;
+  }
+  h3{
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  .main-content {
+    height: auto;
+}
+}
+
+@media(min-width:577px) and (max-width:768px){
+  img{
+    width: 300px;
+  }
+  h3{
+    margin-top: 15px;
+    font-size: 20px;
+  }
+  .main-content {
+    height: auto;
+}
+}
+@media(min-width:769px) and (max-width:992px){
+  .main-content {
+    height: auto;
+}
+}

@@ -24,9 +24,11 @@ export class CommonServiceService {
   getVehiclesList() {
     return this.httpService.get(`vehicles`);
   }
+  // get the token
   getToken = (data) => {
     return this.httpService.post(`token`, data);
   }
+  // sending all the data for finding the falcon
   findFalcon = (data) => {
     return this.httpService.post(`find`, data);
   }

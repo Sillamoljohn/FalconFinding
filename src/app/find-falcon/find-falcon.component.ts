@@ -45,14 +45,14 @@ export class FindFalconComponent implements OnInit {
   // loadForm for find a falcon
   loadupdatesForm(): void {
     this.findFalconForm = this.fb.group({
-      destination_1: [{ name: 'select', distance: 500 }],
-      destination_2: [{ name: 'select', distance: 500 }],
-      destination_3: [{ name: 'select', distance: 500 }],
-      destination_4: [{ name: 'select', distance: 500 }],
-      vehicle_name1: [],
-      vehicle_name2: [],
-      vehicle_name3: [],
-      vehicle_name4: [],
+      destination_1: [{ name: 'select', distance: 500 },Validators.required],
+      destination_2: [{ name: 'select', distance: 500 },Validators.required],
+      destination_3: [{ name: 'select', distance: 500 },Validators.required],
+      destination_4: [{ name: 'select', distance: 500 },Validators.required],
+      vehicle_name1: ['',Validators.required],
+      vehicle_name2: ['',Validators.required],
+      vehicle_name3: ['',Validators.required],
+      vehicle_name4: ['',Validators.required],
     });
   }
 
